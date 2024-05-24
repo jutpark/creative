@@ -14,6 +14,12 @@ let questions = [
 ];
 
 let options = ["Paris", "London", "Berlin", "Madrid"];
+let buttonPositions = [
+    { x: 30, y: 60 },
+    { x: 80, y: 40 },
+    { x: 360, y: 20 },
+    { x: 140, y: 80 }
+];
 let currentQuestionIndex = 0;
 
 function setup() {
@@ -35,9 +41,11 @@ function displayQuestion() {
     let answerButtonsDiv = select('#answer-buttons');
     answerButtonsDiv.html('');
 
-    for (let option of options) {
-        let button = createButton(option);
-        button.mousePressed(() => checkAnswer(option));
+    for (let i = 0; i < options.length; i++) {
+        let button = createButton(options[i]);
+        button.position(buttonPositions[i].x, buttonPositions[i].y);
+        button.addClass('answer-button');
+        button.mousePressed(() => checkAnswer(options[i]));
         answerButtonsDiv.child(button);
     }
 
