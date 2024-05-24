@@ -13,12 +13,17 @@ let questions = [
     }
 ];
 
-let options = ["Paris", "London", "Berlin", "Madrid"];
+let options = ["Paris", "London", "Berlin", "Madrid", "Rome", "Athens", "Lisbon", "Vienna", "Prague"];
 let buttonPositions = [
-    { x: 30, y: 60 },
-    { x: 80, y: 40 },
-    { x: 360, y: 20 },
-    { x: 140, y: 80 }
+    { x: 30, y: 30 },
+    { x: 100, y: 30 },
+    { x: 170, y: 30 },
+    { x: 30, y: 80 },
+    { x: 100, y: 80 },
+    { x: 170, y: 80 },
+    { x: 30, y: 130 },
+    { x: 100, y: 130 },
+    { x: 170, y: 130 }
 ];
 let currentQuestionIndex = 0;
 
