@@ -1,25 +1,24 @@
 let questions = [
     {
         question: "What is the capital of France?",
-        options: ["Paris", "London", "Berlin", "Madrid"],
         correctAnswer: "Paris"
     },
     {
         question: "What is the capital of Spain?",
-        options: ["Lisbon", "Madrid", "Rome", "Athens"],
         correctAnswer: "Madrid"
     },
     {
         question: "What is the capital of Germany?",
-        options: ["Berlin", "Vienna", "Amsterdam", "Prague"],
         correctAnswer: "Berlin"
     }
 ];
 
+let options = ["Paris", "London", "Berlin", "Madrid"];
 let currentQuestionIndex = 0;
 
 function setup() {
     noCanvas();
+    initializeDropdown();
     displayQuestion();
 
     let nextBtn = select('#next-btn');
@@ -32,17 +31,19 @@ function setup() {
     submitBtn.mousePressed(checkAnswer);
 }
 
-function displayQuestion() {
-    let questionP = select('#question');
+function initializeDropdown() {
     let dropdown = select('#answer-dropdown');
     dropdown.html('<option value="default">Select an answer</option>');
 
-    let currentQuestion = questions[currentQuestionIndex];
-    questionP.html(currentQuestion.question);
-
-    for (let option of currentQuestion.options) {
+    for (let option of options) {
         dropdown.child(createElement('option', option).attribute('value', option));
     }
+}
+
+function displayQuestion() {
+    let questionP = select('#question');
+    let currentQuestion = questions[currentQuestionIndex];
+    questionP.html(currentQuestion.question);
 
     let resultP = select('#result');
     resultP.html('');
