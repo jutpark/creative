@@ -15,7 +15,7 @@ let questions = [
 
 let options = ["Paris", "London", "Berlin", "Madrid", "Rome", "Athens", "Lisbon", "Vienna", "Prague"];
 let buttonPositions = [
-    { x: 60, y: 30 },
+    { x: -20, y: 30 },
     { x: 200, y: 30 },
     { x: 270, y: 30 },
     { x: 20, y: 80 },
