@@ -1,26 +1,26 @@
 //the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
-    { question: "Where is this tree?", correctAnswer: 3 }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 2 }, // BSOE button index
-    { question: "Where is this tree?", correctAnswer: 4 }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 0 }, // Oakes/RCC button index
-    { question: "Where is this tree?", correctAnswer: 1 }, // Porter/Kresge button index
-    { question: "Where is this tree?", correctAnswer: 5 }, // Mchenry button index
-    { question: "Where is this tree?", correctAnswer: 6 }, // Cowell/Stevenson button index
-    { question: "Where is this tree?", correctAnswer: 3 }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 4 }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 2 }  // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpg' }, // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree3.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 0, img: 'tree4.jpg' }, // Oakes/RCC button index
+    { question: "Where is this tree?", correctAnswer: 1, img: 'tree5.jpg' }, // Porter/Kresge button index
+    { question: "Where is this tree?", correctAnswer: 5, img: 'tree6.jpg' }, // Mchenry button index
+    { question: "Where is this tree?", correctAnswer: 6, img: 'tree7.jpg' }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'tree8.jpg' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree9.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree10.jpg' } // BSOE button index
 ];
 
 let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
 let buttonPositions = [
-    { x: 30, y: 30 },
-    { x: 200, y: 30 },
-    { x: 270, y: 30 },
-    { x: 20, y: 80 },
-    { x: 200, y: 80 },
-    { x: 270, y: 80 },
-    { x: 20, y: 130 }
+    { x: 30, y: 200 },
+    { x: 150, y: 200 },
+    { x: 270, y: 200 },
+    { x: 30, y: 250 },
+    { x: 150, y: 250 },
+    { x: 270, y: 250 },
+    { x: 150, y: 300 }
 ];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
@@ -32,27 +32,34 @@ let resultMessage = '';
 let resultColor = '';
 let resultOpacity = 255;
 let fadeOutTimer;
+let currentImage;
+
+function preload() {
+    // Preload all images
+    questions.forEach(q => {
+        q.img = loadImage(q.img);
+    });
+}
 
 function setup() {
-    let canvas = createCanvas(400, 300);
+    let canvas = createCanvas(400, 400);
     canvas.parent('canvas-container');
     displayQuestion();
 }
 
 function displayQuestion() {
     resultOpacity = 255; // Reset opacity
+    currentImage = questions[currentQuestionIndex].img;
     redraw();
 }
 
 function draw() {
     background(255);
 
-    // Draw the question
-    let currentQuestion = questions[currentQuestionIndex];
-    fill(0);
-    textSize(16);
-    textAlign(CENTER, CENTER);
-    text(currentQuestion.question, width / 2, 20);
+    // Draw the question image
+    if (currentImage) {
+        image(currentImage, 0, 0, width, height / 2); // Display the image at the top half of the canvas
+    }
 
     // Draw the buttons
     for (let i = 0; i < buttonPositions.length; i++) {
@@ -77,7 +84,7 @@ function draw() {
         textSize(16);
         textAlign(CENTER, CENTER);
         text(resultMessage, width / 2, height - 20);
-        
+
         if (resultOpacity > 0) {
             resultOpacity -= 5; // Fade out effect
         }
@@ -91,7 +98,7 @@ function draw() {
 }
 
 function mousePressed() {
-    if (mouseY > 40 && mouseY < height) { // Ensure the click is within the canvas and not on the buttons or nav
+    if (mouseY > height / 2 && mouseY < height) { // Ensure the click is within the bottom half of the canvas
         let dot = { x: mouseX, y: mouseY };
         dots.push(dot);
         checkAnswer(dot);
@@ -133,7 +140,10 @@ function checkAnswer(dot) {
 
     resultOpacity = 255;
     clearTimeout(fadeOutTimer);
-    fadeOutTimer = setTimeout(nextQuestion, 1000); // Move to next question after 1 second
+    fadeOutTimer = setTimeout(() => {
+        resultMessage = '';
+        nextQuestion();
+    }, 1000); // Clear result and move to next question after 1 second
 }
 
 function displayResult() {
@@ -143,13 +153,13 @@ function displayResult() {
     textSize(24);
     textAlign(CENTER, CENTER);
     text("Quiz Completed!", width / 2, height / 4);
-    
+
     fill(0, 102, 153);
     rectMode(CENTER);
     let barWidth = 50;
     let barHeight = map(correctAnswers, 0, questions.length, 0, height / 2);
     rect(width / 2, height / 2, barWidth, -barHeight);
-    
+
     textSize(16);
     text(correctAnswers + " out of " + questions.length + " correct", width / 2, (height / 2) + 20);
 }
