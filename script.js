@@ -14,13 +14,13 @@ let questions = [
 
 let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
 let buttonPositions = [
-    { x: 50, y: 400 },
-    { x: 200, y: 400 },
-    { x: 350, y: 400 },
-    { x: 50, y: 450 },
-    { x: 200, y: 450 },
-    { x: 350, y: 450 },
-    { x: 200, y: 500 }
+    { x: 50, y: 500 },
+    { x: 250, y: 500 },
+    { x: 450, y: 500 },
+    { x: 50, y: 550 },
+    { x: 250, y: 550 },
+    { x: 450, y: 550 },
+    { x: 250, y: 600 }
 ];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
@@ -42,7 +42,7 @@ function preload() {
 }
 
 function setup() {
-    let canvas = createCanvas(600, 600);
+    let canvas = createCanvas(600, 700);
     canvas.parent('canvas-container');
     displayQuestion();
 }
@@ -61,12 +61,14 @@ function draw() {
         image(currentImage, 0, 0, width, height / 2); // Display the image at the top half of the canvas
     }
 
-    // Draw the buttons (without background boxes)
+    // Draw the buttons
     for (let i = 0; i < buttonPositions.length; i++) {
+        fill(200);
+        rect(buttonPositions[i].x, buttonPositions[i].y, 150, 40, 5); // Adjusted the size of the buttons
         fill(0);
         textSize(14);
         textAlign(CENTER, CENTER);
-        text(options[i], buttonPositions[i].x + 50, buttonPositions[i].y + 15);
+        text(options[i], buttonPositions[i].x + 75, buttonPositions[i].y + 20); // Adjusted the position of the text
     }
 
     // Draw all red dots
@@ -125,7 +127,7 @@ function prevQuestion() {
 function checkAnswer(dot) {
     let currentQuestion = questions[currentQuestionIndex];
     let correctButton = buttonPositions[currentQuestion.correctAnswer];
-    let distance = dist(dot.x, dot.y, correctButton.x + 50, correctButton.y + 15); // Center of the button
+    let distance = dist(dot.x, dot.y, correctButton.x + 75, correctButton.y + 20); // Center of the button
 
     if (distance <= distanceThreshold) {
         resultMessage = "Correct!";
