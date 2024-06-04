@@ -1,3 +1,4 @@
+//the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
     { question: "Where is this tree?", correctAnswer: 3 }, // College 9/10 button index
     { question: "Where is this tree?", correctAnswer: 2 }, // BSOE button index
@@ -28,40 +29,27 @@ let dots = []; // Array to store positions of red dots
 const distanceThreshold = 50; // Maximum distance to consider the answer correct
 
 function setup() {
-    createCanvas(400, 300);
+    let canvas = createCanvas(400, 300);
+    canvas.parent('canvas-container');
     noLoop();
     displayQuestion();
-
-    let nextBtn = select('#next-btn');
-    nextBtn.mousePressed(nextQuestion);
-
-    let prevBtn = select('#prev-btn');
-    prevBtn.mousePressed(prevQuestion);
 }
 
 function displayQuestion() {
-    let questionP = select('#question');
-    let currentQuestion = questions[currentQuestionIndex];
-    questionP.html(currentQuestion.question);
-
-    let answerButtonsDiv = select('#answer-buttons');
-    answerButtonsDiv.html('');
-
-    for (let i = 0; i < options.length; i++) {
-        let button = createButton(options[i]);
-        button.position(buttonPositions[i].x, buttonPositions[i].y);
-        button.addClass('answer-button');
-        answerButtonsDiv.child(button);
-    }
-
-    let resultP = select('#result');
-    resultP.html('');
+    redraw();
 }
 
 function draw() {
     background(255);
 
-    // Draw the buttons manually (since p5's position doesn't actually affect the canvas)
+    // Draw the question
+    let currentQuestion = questions[currentQuestionIndex];
+    fill(0);
+    textSize(16);
+    textAlign(CENTER, CENTER);
+    text(currentQuestion.question, width / 2, 20);
+
+    // Draw the buttons
     for (let i = 0; i < buttonPositions.length; i++) {
         fill(200);
         rect(buttonPositions[i].x, buttonPositions[i].y, 100, 30, 5);
@@ -77,10 +65,19 @@ function draw() {
         noStroke();
         ellipse(dot.x, dot.y, 10, 10);
     }
+
+    // Display result if needed
+    let resultP = select('#result');
+    if (resultP) {
+        fill(resultP.style('color') === 'green' ? 'green' : 'red');
+        textSize(16);
+        textAlign(CENTER, CENTER);
+        text(resultP.html(), width / 2, height - 20);
+    }
 }
 
 function mousePressed() {
-    if (mouseY > 20 && mouseY < height) { // Ensure the click is within the canvas and not on the buttons or nav
+    if (mouseY > 40 && mouseY < height) { // Ensure the click is within the canvas and not on the buttons or nav
         let dot = { x: mouseX, y: mouseY };
         dots.push(dot);
         checkAnswer(dot);
@@ -111,7 +108,9 @@ function checkAnswer(dot) {
     let correctButton = buttonPositions[currentQuestion.correctAnswer];
     let distance = dist(dot.x, dot.y, correctButton.x + 50, correctButton.y + 15); // Center of the button
 
-    let resultP = select('#result');
+    let resultP = createDiv('');
+    resultP.id('result');
+    resultP.parent('canvas-container');
 
     if (distance <= distanceThreshold) {
         resultP.html("Correct!");
@@ -126,10 +125,8 @@ function checkAnswer(dot) {
 }
 
 function displayResult() {
-    let quizContainer = select('#quiz-container');
-    quizContainer.html('');
-    
     background(255);
+
     fill(0);
     textSize(24);
     textAlign(CENTER, CENTER);

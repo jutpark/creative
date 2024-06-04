@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz with p5.js</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #canvas-container {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-    <h1>Quiz</h1>
-    <div id="quiz-container">
-        <p id="question"></p>
-        <div id="answer-buttons"></div>
-        <div id="nav-buttons">
-            <button id="prev-btn">Previous</button>
-            <button id="next-btn">Next</button>
-        </div>
-        <p id="result"></p>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="script.js"></script>
+    <div id="canvas-container"></div>
 </body>
 </html>
