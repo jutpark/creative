@@ -28,6 +28,11 @@ let dots = []; // Array to store positions of red dots
 
 const distanceThreshold = 50; // Maximum distance to consider the answer correct
 
+let resultMessage = '';
+let resultColor = '';
+let resultOpacity = 255;
+let fadeOutTimer;
+
 function setup() {
     let canvas = createCanvas(400, 300);
     canvas.parent('canvas-container');
@@ -35,6 +40,7 @@ function setup() {
 }
 
 function displayQuestion() {
+    resultOpacity = 255; // Reset opacity
     redraw();
 }
 
@@ -64,6 +70,24 @@ function draw() {
         noStroke();
         ellipse(dot.x, dot.y, 10, 10);
     }
+
+    // Display result message
+    if (resultMessage) {
+        fill(resultColor.levels[0], resultColor.levels[1], resultColor.levels[2], resultOpacity);
+        textSize(16);
+        textAlign(CENTER, CENTER);
+        text(resultMessage, width / 2, height - 20);
+        
+        if (resultOpacity > 0) {
+            resultOpacity -= 5; // Fade out effect
+        }
+    }
+
+    // Display score
+    fill(0);
+    textSize(12);
+    textAlign(RIGHT, TOP);
+    text(`Score: ${correctAnswers}`, width - 10, 10);
 }
 
 function mousePressed() {
@@ -98,20 +122,18 @@ function checkAnswer(dot) {
     let correctButton = buttonPositions[currentQuestion.correctAnswer];
     let distance = dist(dot.x, dot.y, correctButton.x + 50, correctButton.y + 15); // Center of the button
 
-    let resultP = createDiv('');
-    resultP.id('result');
-    resultP.parent('canvas-container');
-
     if (distance <= distanceThreshold) {
-        resultP.html("Correct!");
-        resultP.style('color', 'green');
+        resultMessage = "Correct!";
+        resultColor = color('green');
         correctAnswers++;
     } else {
-        resultP.html("Incorrect. The correct answer is " + options[currentQuestion.correctAnswer] + ".");
-        resultP.style('color', 'red');
+        resultMessage = "Incorrect. The correct answer is " + options[currentQuestion.correctAnswer] + ".";
+        resultColor = color('red');
     }
 
-    setTimeout(nextQuestion, 2000); // Move to next question after 2 seconds
+    resultOpacity = 255;
+    clearTimeout(fadeOutTimer);
+    fadeOutTimer = setTimeout(nextQuestion, 1000); // Move to next question after 1 second
 }
 
 function displayResult() {
