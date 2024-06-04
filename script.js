@@ -2,14 +2,14 @@
 let questions = [
     { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
     { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpeg' }, // BSOE button index
-    { question: "Where is this tree?", correctAnswer: 4, img: 'tree3.jpg' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 0, img: 'tree4.jpg' }, // Oakes/RCC button index
-    { question: "Where is this tree?", correctAnswer: 1, img: 'tree5.jpg' }, // Porter/Kresge button index
-    { question: "Where is this tree?", correctAnswer: 5, img: 'tree6.jpg' }, // Mchenry button index
-    { question: "Where is this tree?", correctAnswer: 6, img: 'tree7.jpg' }, // Cowell/Stevenson button index
-    { question: "Where is this tree?", correctAnswer: 3, img: 'tree8.jpg' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 4, img: 'tree9.jpg' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'tree10.jpg' } // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree1.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 0, img: 'tree1.jpg' }, // Oakes/RCC button index
+    { question: "Where is this tree?", correctAnswer: 1, img: 'tree1.jpg' }, // Porter/Kresge button index
+    { question: "Where is this tree?", correctAnswer: 5, img: 'tree1.jpg' }, // Mchenry button index
+    { question: "Where is this tree?", correctAnswer: 6, img: 'tree1.jpg' }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree1.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree1.jpg' } // BSOE button index
 ];
 
 let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
