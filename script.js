@@ -31,7 +31,6 @@ const distanceThreshold = 50; // Maximum distance to consider the answer correct
 function setup() {
     let canvas = createCanvas(400, 300);
     canvas.parent('canvas-container');
-    noLoop();
     displayQuestion();
 }
 
@@ -64,15 +63,6 @@ function draw() {
         fill(255, 0, 0);
         noStroke();
         ellipse(dot.x, dot.y, 10, 10);
-    }
-
-    // Display result if needed
-    let resultP = select('#result');
-    if (resultP) {
-        fill(resultP.style('color') === 'green' ? 'green' : 'red');
-        textSize(16);
-        textAlign(CENTER, CENTER);
-        text(resultP.html(), width / 2, height - 20);
     }
 }
 
@@ -121,7 +111,7 @@ function checkAnswer(dot) {
         resultP.style('color', 'red');
     }
 
-    nextQuestion();
+    setTimeout(nextQuestion, 2000); // Move to next question after 2 seconds
 }
 
 function displayResult() {
