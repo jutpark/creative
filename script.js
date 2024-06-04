@@ -1,7 +1,7 @@
 //the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
     { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpg' }, // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpeg' }, // BSOE button index
     { question: "Where is this tree?", correctAnswer: 4, img: 'tree3.jpg' }, // Crown/Merrill button index
     { question: "Where is this tree?", correctAnswer: 0, img: 'tree4.jpg' }, // Oakes/RCC button index
     { question: "Where is this tree?", correctAnswer: 1, img: 'tree5.jpg' }, // Porter/Kresge button index
