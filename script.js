@@ -1,20 +1,19 @@
-//the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
-    { question: "Where is this tree?", correctAnswer: "College 9" },
-    { question: "Where is this tree?", correctAnswer: "BSOE" },
-    { question: "Where is this tree?", correctAnswer: "Crown" },
-    { question: "Where is this tree?", correctAnswer: "Oakes/RCC" },
-    { question: "Where is this tree?", correctAnswer: "Porter/Kresge" },
-    { question: "Where is this tree?", correctAnswer: "Mchenry" },
-    { question: "Where is this tree?", correctAnswer: "Cowell/Stevenson" },
-    { question: "Where is this tree?", correctAnswer: "College 9/10" },
-    { question: "Where is this tree?", correctAnswer: "Crown/Merrill" },
-    { question: "Where is this tree?", correctAnswer: "BSOE" }
+    { question: "Where is this tree?", correctAnswer: 3 }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 2 }, // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 4 }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 0 }, // Oakes/RCC button index
+    { question: "Where is this tree?", correctAnswer: 1 }, // Porter/Kresge button index
+    { question: "Where is this tree?", correctAnswer: 5 }, // Mchenry button index
+    { question: "Where is this tree?", correctAnswer: 6 }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 3 }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 4 }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 2 }  // BSOE button index
 ];
 
 let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
 let buttonPositions = [
-    { x: -20, y: 30 },
+    { x: 30, y: 30 },
     { x: 200, y: 30 },
     { x: 270, y: 30 },
     { x: 20, y: 80 },
@@ -25,6 +24,8 @@ let buttonPositions = [
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let dots = []; // Array to store positions of red dots
+
+const distanceThreshold = 50; // Maximum distance to consider the answer correct
 
 function setup() {
     createCanvas(400, 300);
@@ -50,7 +51,6 @@ function displayQuestion() {
         let button = createButton(options[i]);
         button.position(buttonPositions[i].x, buttonPositions[i].y);
         button.addClass('answer-button');
-        button.mousePressed(() => checkAnswer(options[i]));
         answerButtonsDiv.child(button);
     }
 
@@ -81,7 +81,9 @@ function draw() {
 
 function mousePressed() {
     if (mouseY > 20 && mouseY < height) { // Ensure the click is within the canvas and not on the buttons or nav
-        dots.push({ x: mouseX, y: mouseY });
+        let dot = { x: mouseX, y: mouseY };
+        dots.push(dot);
+        checkAnswer(dot);
         redraw();
     }
 }
@@ -89,6 +91,7 @@ function mousePressed() {
 function nextQuestion() {
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
+        dots = []; // Clear dots for the next question
         displayQuestion();
     } else {
         displayResult();
@@ -98,20 +101,24 @@ function nextQuestion() {
 function prevQuestion() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
+        dots = []; // Clear dots for the previous question
         displayQuestion();
     }
 }
 
-function checkAnswer(selectedAnswer) {
+function checkAnswer(dot) {
     let currentQuestion = questions[currentQuestionIndex];
+    let correctButton = buttonPositions[currentQuestion.correctAnswer];
+    let distance = dist(dot.x, dot.y, correctButton.x + 50, correctButton.y + 15); // Center of the button
+
     let resultP = select('#result');
 
-    if (selectedAnswer === currentQuestion.correctAnswer) {
+    if (distance <= distanceThreshold) {
         resultP.html("Correct!");
         resultP.style('color', 'green');
         correctAnswers++;
     } else {
-        resultP.html("Incorrect. The correct answer is " + currentQuestion.correctAnswer + ".");
+        resultP.html("Incorrect. The correct answer is " + options[currentQuestion.correctAnswer] + ".");
         resultP.style('color', 'red');
     }
 
