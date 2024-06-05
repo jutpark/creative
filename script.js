@@ -1,15 +1,15 @@
 //the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
     { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpeg' }, // BSOE button index
-    { question: "Where is this tree?", correctAnswer: 4, img: 'tree1.jpg' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 0, img: 'tree1.jpg' }, // Oakes/RCC button index
-    { question: "Where is this tree?", correctAnswer: 1, img: 'tree1.jpg' }, // Porter/Kresge button index
-    { question: "Where is this tree?", correctAnswer: 5, img: 'tree1.jpg' }, // Mchenry button index
-    { question: "Where is this tree?", correctAnswer: 6, img: 'tree1.jpg' }, // Cowell/Stevenson button index
-    { question: "Where is this tree?", correctAnswer: 3, img: 'tree1.jpg' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 4, img: 'tree1.jpg' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'tree1.jpg' } // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree2.jpg' }, // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree3.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 0, img: 'tree4.jpg' }, // Oakes/RCC button index
+    { question: "Where is this tree?", correctAnswer: 1, img: 'tree5.jpg' }, // Porter/Kresge button index
+    { question: "Where is this tree?", correctAnswer: 5, img: 'tree6.jpg' }, // Mchenry button index
+    { question: "Where is this tree?", correctAnswer: 6, img: 'tree7.jpg' }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'tree8.jpg' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 4, img: 'tree9.jpg' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'tree10.jpg' } // BSOE button index
 ];
 
 let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
@@ -45,6 +45,7 @@ function setup() {
     let canvas = createCanvas(600, 700);
     canvas.parent('canvas-container');
     displayQuestion();
+    createButton("reimagine").mousePressed(() => seed++);
 }
 
 function displayQuestion() {
@@ -54,7 +55,7 @@ function displayQuestion() {
 }
 
 function draw() {
-    background(255);
+    drawBackground(); // Draw the provided background
 
     // Draw the question image
     if (currentImage) {
@@ -162,4 +163,77 @@ function displayResult() {
 
     textSize(16);
     text(correctAnswers + " out of " + questions.length + " correct", width / 2, (height / 2) + 20);
+}
+
+let seed = 239;
+
+const dirtColor = "#76552b";
+const shadeColor = "#636363";
+const stoneColor = "#858290";
+const treeColor = "#33330b";
+
+function drawBackground() {
+    randomSeed(seed);
+
+    background(100);
+
+    noStroke();
+
+    fill(dirtColor);
+    rect(0, 0, width, height);
+
+    fill(treeColor);
+    const trees = 700 * random();
+    const scrub = mouseX / width;
+    for (let i = 0; i < trees; i++) {
+        let z = random();
+        let x = width * ((random() + (scrub / 50 + millis() / 500000.0) / z) % 1);
+        let s = width / 50 / z;
+        let y = height / 6 + height / 20 / z;
+        let f = y / 10;
+        triangle(x, y - s, x - s / 4, y, x + s / 4, y);
+        triangle(x, y - s - f, x - s / 4, y - f, x + s / 4, y - f);
+        triangle(x, y - s - 2 * f, x - s / 4, y - 2 * f, x + s / 4, y - 2 * f);
+    }
+
+    fill(shadeColor);
+    beginShape();
+    let x = width * (1 / random(1, 2));
+    let y = height * (1 / random(1, 2));
+    let a = random(1.5, 2);
+    vertex(x / a, y / a);
+    vertex(x / 4, y / 4);
+    vertex(x / 2, y / 7);
+    vertex(x / 1.5, y / 7);
+    vertex(x / 1.25, y / 1.5);
+    vertex(x / 1.7, y / 1.1);
+    vertex(x / 2.5, y / 1.5);
+    vertex(x / a, y / a);
+    endShape(CLOSE);
+
+    fill(stoneColor);
+    beginShape();
+    vertex((x / a) + 5, y / a);
+    vertex(x / 4 + 5, y / 4);
+    vertex(x / 2, y / 7 + 5);
+    vertex(x / 1.5 - 5, y / 7 + 5);
+    vertex(x / 1.25, y / 1.5);
+    vertex(x / 1.7, y / 1.1);
+    vertex(x / 2.5, y / 1.5);
+    vertex(x / a, y / a);
+    endShape(CLOSE);
+
+    fill(treeColor);
+    let trees2 = 15 * random();
+    let scrub2 = mouseX / width;
+    for (let i = 0; i < trees2; i++) {
+        let z = random();
+        let x = width * (((scrub2 / 50 + millis() / 500000.0) / z) % 1);
+        let s = width / 40 / z;
+        let y = height / 6 + height / 20 / z;
+        let f = y / 10;
+        triangle(x, y - s, x - s / 4, y, x + s / 4, y);
+        triangle(x, y - s - f, x - s / 4, y - f, x + s / 4, y - f);
+        triangle(x, y - s - 2 * f, x - s / 4, y - 2 * f, x + s / 4, y - 2 * f);
+    }
 }
