@@ -196,33 +196,6 @@ function drawBackground() {
         triangle(x, y - s - 2 * f, x - s / 4, y - 2 * f, x + s / 4, y - 2 * f);
     }
 
-    fill(shadeColor);
-    beginShape();
-    let x = width * (1 / random(1, 2));
-    let y = height * (1 / random(1, 2));
-    let a = random(1.5, 2);
-    vertex(x / a, y / a);
-    vertex(x / 4, y / 4);
-    vertex(x / 2, y / 7);
-    vertex(x / 1.5, y / 7);
-    vertex(x / 1.25, y / 1.5);
-    vertex(x / 1.7, y / 1.1);
-    vertex(x / 2.5, y / 1.5);
-    vertex(x / a, y / a);
-    endShape(CLOSE);
-
-    fill(stoneColor);
-    beginShape();
-    vertex((x / a) + 5, y / a);
-    vertex(x / 4 + 5, y / 4);
-    vertex(x / 2, y / 7 + 5);
-    vertex(x / 1.5 - 5, y / 7 + 5);
-    vertex(x / 1.25, y / 1.5);
-    vertex(x / 1.7, y / 1.1);
-    vertex(x / 2.5, y / 1.5);
-    vertex(x / a, y / a);
-    endShape(CLOSE);
-
     fill(treeColor);
     let trees2 = 15 * random();
     let scrub2 = mouseX / width;
