@@ -24,6 +24,9 @@ let buttonPositions = [
 ];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
+let attempts = 0;
+let attemptsPerQuestion = Array(questions.length).fill(0);
+let timesScored = Array(questions.length).fill(0);
 let dots = []; // Array to store positions of red dots
 
 const distanceThreshold = 50; // Maximum distance to consider the answer correct
@@ -138,10 +141,14 @@ function checkAnswer(dot) {
     let correctButton = buttonPositions[currentQuestion.correctAnswer];
     let distance = dist(dot.x, dot.y, correctButton.x + 75, correctButton.y + 20); // Center of the button
 
+    attempts++;
+    attemptsPerQuestion[currentQuestionIndex]++;
+
     if (distance <= distanceThreshold) {
         resultMessage = "Correct!";
         resultColor = color('green');
         correctAnswers++;
+        timesScored[currentQuestionIndex]++;
         resultOpacity = 255;
         clearTimeout(fadeOutTimer);
         fadeOutTimer = setTimeout(() => {
@@ -167,14 +174,37 @@ function displayResult() {
     textAlign(CENTER, CENTER);
     text("Quiz Completed!", width / 2, height / 4);
 
-    fill(0, 102, 153);
-    rectMode(CENTER);
-    let barWidth = 50;
-    let barHeight = map(correctAnswers, 0, questions.length, 0, height / 2);
-    rect(width / 2, height / 2, barWidth, -barHeight);
+    // Display attempts and scores bar graph
+    let maxAttempts = max(attemptsPerQuestion);
+    let maxScore = max(timesScored);
 
     textSize(16);
-    text(correctAnswers + " out of " + questions.length + " correct", width / 2, (height / 2) + 20);
+    textAlign(CENTER, CENTER);
+    text("Attempts and Scores", width / 2, height / 3);
+
+    for (let i = 0; i < questions.length; i++) {
+        let barWidth = 30;
+        let barSpacing = 40;
+        let attemptsBarHeight = map(attemptsPerQuestion[i], 0, maxAttempts, 0, height / 4);
+        let scoreBarHeight = map(timesScored[i], 0, maxScore, 0, height / 4);
+        
+        // Attempts bar
+        fill(0, 102, 153);
+        rect((i * barSpacing) + width / 2 - questions.length * barSpacing / 2, height / 2, barWidth, -attemptsBarHeight);
+        
+        // Score bar
+        fill(0, 255, 0);
+        rect((i * barSpacing) + width / 2 - questions.length * barSpacing / 2 + barWidth + 5, height / 2, barWidth, -scoreBarHeight);
+        
+        // Display question index below bars
+        fill(0);
+        textSize(12);
+        text(i + 1, (i * barSpacing) + width / 2 - questions.length * barSpacing / 2 + barWidth / 2, height / 2 + 15);
+    }
+
+    // Display total score
+    textSize(16);
+    text(correctAnswers + " out of " + questions.length + " correct", width / 2, height / 2 + 50);
 }
 
 let seed = 239;
