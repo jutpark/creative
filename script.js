@@ -15,12 +15,12 @@ let questions = [
 let options = ["BSOE", "College 9/10", "Crown/Merrill", "Porter/Kresge", "Mchenry", "Cowell/Stevenson", "Oakes/RCC"];
 let buttonPositions = [
     { x: 50, y: 500 },
-    { x: 250, y: 500 },
+    { x: 250, y: 700 },
     { x: 450, y: 500 },
     { x: 50, y: 550 },
     { x: 250, y: 550 },
     { x: 450, y: 550 },
-    { x: 250, y: 600 }
+    { x: 50, y: 600 }
 ];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
