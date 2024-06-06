@@ -68,6 +68,11 @@ function displayQuestion() {
 function draw() {
     drawBackground(); // Draw the provided background
 
+    if (currentQuestionIndex >= questions.length) {
+        displayResult();
+        return;
+    }
+
     // Draw the question image
     if (currentImage) {
         image(currentImage, 0, 0, width, height / 2); // Display the image at the top half of the canvas
@@ -124,7 +129,8 @@ function nextQuestion() {
         dots = []; // Clear dots for the next question
         displayQuestion();
     } else {
-        displayResult();
+        currentQuestionIndex++;
+        redraw();
     }
 }
 
