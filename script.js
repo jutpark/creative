@@ -1,15 +1,15 @@
 //the website has been iteratively designed using chatGPT to create a basic quiz system. From here I will be implementing the P5.js and data vis but the quiz functionally works. I'll need to add shuffling for questions once I have them. 
 let questions = [
-    { question: "Where is this tree?", correctAnswer: 3, img: 'c9.png' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 0, img: 'BSOE.png' }, // BSOE button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'Crown.png' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 6, img: 'RCC.png' }, // Oakes/RCC button index
-    { question: "Where is this tree?", correctAnswer: 3, img: 'BSOE2.png' }, // Porter/Kresge button index
-    { question: "Where is this tree?", correctAnswer: 3, img: 'Porter.png' }, // Porter button index
-    { question: "Where is this tree?", correctAnswer: 5, img: 'cowell.png' }, // Cowell/Stevenson button index
-    { question: "Where is this tree?", correctAnswer: 1, img: 'Kresge.png' }, // College 9/10 button index
-    { question: "Where is this tree?", correctAnswer: 2, img: 'Merrill.png' }, // Crown/Merrill button index
-    { question: "Where is this tree?", correctAnswer: 0, img: 'Libraries.png' } // S&E button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'c9.PNG' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 0, img: 'BSOE.PNG' }, // BSOE button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'Crown.PNG' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 6, img: 'RCC.PNG' }, // Oakes/RCC button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'BSOE2.PNG' }, // Porter/Kresge button index
+    { question: "Where is this tree?", correctAnswer: 3, img: 'Porter.PNG' }, // Porter button index
+    { question: "Where is this tree?", correctAnswer: 5, img: 'cowell.PNG' }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 1, img: 'Kresge.PNG' }, // College 9/10 button index
+    { question: "Where is this tree?", correctAnswer: 2, img: 'Merrill.PNG' }, // Crown/Merrill button index
+    { question: "Where is this tree?", correctAnswer: 0, img: 'Libraries.PNG' } // S&E button index
 ];
 
 let options = ["BSOE", "College 9/10", "Crown/Merrill", "Porter/Kresge", "Libraries", "Cowell/Stevenson", "Oakes/RCC"];
