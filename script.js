@@ -186,7 +186,7 @@ function displayResult() {
 
     textSize(16);
     textAlign(CENTER, CENTER);
-    text("Attempts and Scores", width / 2, height / 3);
+    text("Attempts and Scores", width / 2, height / 5);
 
     for (let i = 0; i < questions.length; i++) {
         let barWidth = 30;
