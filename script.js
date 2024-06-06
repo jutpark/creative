@@ -178,7 +178,7 @@ function displayResult() {
     fill(0);
     textSize(24);
     textAlign(CENTER, CENTER);
-    text("Quiz Completed!", width / 2, height / 4);
+    text("Quiz Completed!", width / 2, height / 6);
 
     // Display attempts and scores bar graph
     let maxAttempts = max(attemptsPerQuestion);
