@@ -44,8 +44,16 @@ function preload() {
 function setup() {
     let canvas = createCanvas(600, 700);
     canvas.parent('canvas-container');
+    shuffleQuestions();
     displayQuestion();
     createButton("reimagine").mousePressed(() => seed++);
+}
+
+function shuffleQuestions() {
+    for (let i = questions.length - 1; i > 0; i--) {
+        let j = floor(random(i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
 }
 
 function displayQuestion() {
