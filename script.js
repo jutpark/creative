@@ -12,7 +12,7 @@ let questions = [
     { question: "Where is this tree?", correctAnswer: 2, img: 'tree1.jpg' } // BSOE button index
 ];
 
-let options = ["Oakes/RCC", "Porter/Kresge", "BSOE", "College 9/10", "Crown/Merrill", "Mchenry", "Cowell/Stevenson"];
+let options = ["BSOE", "College 9/10", "Crown/Merrill", "Porter/Kresge", "Mchenry", "Cowell/Stevenson", "Oakes/RCC"];
 let buttonPositions = [
     { x: 50, y: 500 },
     { x: 250, y: 500 },
