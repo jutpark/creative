@@ -6,7 +6,7 @@ let questions = [
     { question: "Where is this tree?", correctAnswer: 6, img: 'RCC.PNG' }, // Oakes/RCC button index
     { question: "Where is this tree?", correctAnswer: 3, img: 'BSOE2.PNG' }, // Porter/Kresge button index
     { question: "Where is this tree?", correctAnswer: 3, img: 'Porter.PNG' }, // Porter button index
-    { question: "Where is this tree?", correctAnswer: 5, img: 'cowell.PNG' }, // Cowell/Stevenson button index
+    { question: "Where is this tree?", correctAnswer: 5, img: 'Cowell.PNG' }, // Cowell/Stevenson button index
     { question: "Where is this tree?", correctAnswer: 1, img: 'Kresge.PNG' }, // College 9/10 button index
     { question: "Where is this tree?", correctAnswer: 2, img: 'Merrill.PNG' }, // Crown/Merrill button index
     { question: "Where is this tree?", correctAnswer: 0, img: 'Libraries.PNG' } // S&E button index
