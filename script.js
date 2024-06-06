@@ -142,17 +142,21 @@ function checkAnswer(dot) {
         resultMessage = "Correct!";
         resultColor = color('green');
         correctAnswers++;
+        resultOpacity = 255;
+        clearTimeout(fadeOutTimer);
+        fadeOutTimer = setTimeout(() => {
+            resultMessage = '';
+            nextQuestion();
+        }, 1000); // Clear result and move to next question after 1 second
     } else {
-        resultMessage = "Incorrect. The correct answer is " + options[currentQuestion.correctAnswer] + ".";
+        resultMessage = "Incorrect. Try again.";
         resultColor = color('red');
+        resultOpacity = 255;
+        clearTimeout(fadeOutTimer);
+        fadeOutTimer = setTimeout(() => {
+            resultMessage = '';
+        }, 1000); // Clear result after 1 second
     }
-
-    resultOpacity = 255;
-    clearTimeout(fadeOutTimer);
-    fadeOutTimer = setTimeout(() => {
-        resultMessage = '';
-        nextQuestion();
-    }, 1000); // Clear result and move to next question after 1 second
 }
 
 function displayResult() {
